@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
-const { Given, When, Then, After } = require('cucumber');
+const { Given, When, Then } = require('cucumber');
 
 const Bucket = require('../classes/Bucket');
 
@@ -17,4 +17,8 @@ When('he writes file {string} in bucket with key {string}', async function(fileP
 
 Then('bucket should has {string}', async function(fileKey) {
   assert(await this.bucket.has(fileKey));
+});
+
+When('he reads file {string} from bucket', async function (fileKey) {
+  this.readStream = await this.bucket.read(fileKey);
 });

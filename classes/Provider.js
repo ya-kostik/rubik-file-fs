@@ -1,13 +1,22 @@
 const { Provider: ProviderMain } = require('rubik-file');
 
 const Bucket = require('./Bucket');
-const ProviderError = require('./ProviderError');
 
 class Provider extends ProviderMain {
   constructor() {
     super(...arguments);
 
     this._buckets = new Map();
+  }
+
+  async clear() {
+    const promises = [];
+
+    this._buckets.forEach((bucket) => {
+      promises.push((bucket.clear()));
+    });
+
+    await Promise.all(promises);
   }
 
   _createBucket(bucket) {
@@ -34,7 +43,7 @@ class Provider extends ProviderMain {
     return this._call(source, 'write', stream);
   }
 
-  has(source) {
+  async has(source) {
     return this._call(source, 'has');
   }
 }

@@ -89,6 +89,25 @@ class Bucket {
 
     await this._createIndexFile(key, id);
   }
+
+  async _getRealFileName(key) {
+    const name = await fs.promises.readFile(
+      this._getIndexPath(key),
+      'utf-8'
+    );
+    return name.trim();
+  }
+
+  async _getRealFilePath(key) {
+    const id = await this._getRealFileName(key);
+    return path.join(this.dir, id);
+  }
+
+  async read(key) {
+    const filePath = await this._getRealFilePath(key);
+
+    return fs.createReadStream(filePath);
+  }
 }
 
 module.exports = Bucket;
