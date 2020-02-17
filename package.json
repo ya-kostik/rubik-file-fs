@@ -1,0 +1,29 @@
+{
+  "name": "rubik-file-fs",
+  "version": "1.0.0-beta.1",
+  "description": "File system Provider for File Kubik",
+  "main": "classes/Provider.js",
+  "repository": "git@github.com:ya-kostik/rubik-file-fs.git",
+  "author": "Constantin Tsukanov <c@indotech.ru>",
+  "license": "Apache-2.0",
+  "private": false,
+  "scripts": {
+    "test": "cucumber-js",
+    "lint": "eslint ./"
+  },
+  "peerDependencies": {
+    "rubik-file": "^1.0.0-beta.5"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "cucumber": "^6.0.5",
+    "eslint": "^6.8.0",
+    "eslint-plugin-security": "^1.4.0",
+    "jest": "^25.1.0",
+    "rubik-file": "^1.0.0-beta.5",
+    "rubik-main": "^2.2.0"
+  },
+  "dependencies": {
+    "nanoid": "^2.1.11"
+  }
+}
