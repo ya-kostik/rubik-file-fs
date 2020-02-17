@@ -10,15 +10,6 @@ const { createApp } = require('rubik-main/tests/helpers/creators');
 
 const Provider = require('../');
 
-function readStream(stream) {
-  return new Promise((resolve, reject) => {
-    let data = '';
-    stream.on('data', (chunk) => data += chunk);
-    stream.once('error', (err) => reject(err));
-    stream.once('end', () => resolve(data));
-  });
-}
-
 
 Given('Nikita creates File kubik and application', function() {
   this.app = createApp();
@@ -53,7 +44,9 @@ Then('file kubik has key {string} in bucket {string}', async function(key, bucke
   assert(await this.app.file.has({ key, bucket }));
 });
 
-
+When('he reads file with key {string} and bucket {string}', async function(key, bucket) {
+  this.readStream = await this.app.file.read({ key, bucket });
+});
 
 
 

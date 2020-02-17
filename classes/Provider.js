@@ -46,6 +46,10 @@ class Provider extends ProviderMain {
   async has(source) {
     return this._call(source, 'has');
   }
+
+  async read(source) {
+    return this._call(source, 'read');
+  }
 }
 
 module.exports = Provider;
