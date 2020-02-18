@@ -40,12 +40,16 @@ When('he writes file with key {string} and bucket {string}', function(key, bucke
   return this.app.file.write({ key, bucket }, this.readableStream);
 });
 
-Then('file kubik has key {string} in bucket {string}', async function(key, bucket) {
-  assert(await this.app.file.has({ key, bucket }));
+Then('file kubik {has} key {string} in bucket {string}', async function(state, key, bucket) {
+  assert(state === await this.app.file.has({ key, bucket }));
 });
 
 When('he reads file with key {string} and bucket {string}', async function(key, bucket) {
   this.readStream = await this.app.file.read({ key, bucket });
+});
+
+When('he removes file with key {string} and bucket {string}', function (key, bucket) {
+  return this.app.file.remove({ key, bucket });
 });
 
 

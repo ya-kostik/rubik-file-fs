@@ -108,6 +108,14 @@ class Bucket {
 
     return fs.createReadStream(filePath);
   }
+
+  async remove(key) {
+    const filePath = await this._getRealFilePath(key);
+    const fileIndexPath = this._getIndexPath(key);
+
+    await fs.promises.unlink(fileIndexPath);
+    await fs.promises.unlink(filePath);
+  }
 }
 
 module.exports = Bucket;

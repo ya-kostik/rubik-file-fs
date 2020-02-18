@@ -2,13 +2,21 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
 
-const { Then, After } = require('cucumber');
+const { Then, After, defineParameterType } = require('cucumber');
 
 const waitForStream = require('../lib/waitForStream');
 const isFileExists = require('../lib/isFileExists');
 
-Then('file {string} should exists in {string}', async function(fileName, dirPath) {
-  assert(await isFileExists(path.join(__dirname, dirPath, fileName)));
+defineParameterType({
+  name: 'has',
+  regexp: /(has|hasn't|should|shouldn't)/,
+  transformer: (state) => {
+    return state === 'has' || state === 'should';
+  }
+});
+
+Then('file {string} {has} exists in {string}', async function(fileName, state, dirPath) {
+  assert(state === await isFileExists(path.join(__dirname, dirPath, fileName)));
 });
 
 Then('content of key {string} in bucket {string} will be equal to content of {string}', async function(fileKey, bucketName, filePath) {

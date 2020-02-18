@@ -15,10 +15,14 @@ When('he writes file {string} in bucket with key {string}', async function(fileP
   await this.bucket.write(fileKey, readStream);
 });
 
-Then('bucket should has {string}', async function(fileKey) {
-  assert(await this.bucket.has(fileKey));
+Then('bucket {has} has {string}', async function(state, fileKey) {
+  assert(state === await this.bucket.has(fileKey));
 });
 
 When('he reads file {string} from bucket', async function (fileKey) {
   this.readStream = await this.bucket.read(fileKey);
+});
+
+Then('he removes file with key {string}', function (fileKey) {
+  return this.bucket.remove(fileKey);
 });

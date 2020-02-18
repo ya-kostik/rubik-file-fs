@@ -50,6 +50,10 @@ class Provider extends ProviderMain {
   async read(source) {
     return this._call(source, 'read');
   }
+
+  async remove(source) {
+    return this._call(source, 'remove');
+  }
 }
 
 module.exports = Provider;
