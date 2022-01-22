@@ -24,6 +24,6 @@
     "rubik-main": "^2.2.0"
   },
   "dependencies": {
-    "nanoid": "^2.1.11"
+    "nanoid": "^3.1.31"
   }
 }
